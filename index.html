@@ -2,173 +2,300 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>قائمة العمليات القادمة - أ.د. على قطب</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Tahoma,Arial,"Segoe UI",sans-serif;background:#f3f6f9;color:#1f2937;line-height:1.5}
-.page{width:min(1120px,calc(100% - 16px));margin:10px auto 20px}
-.toolbar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
-button,.file-label{border:0;border-radius:9px;padding:10px 12px;font-size:14px;font-weight:800;cursor:pointer}
-.primary{background:#164b70;color:#fff}.secondary{background:#e8eef3;color:#173f5f}.success{background:#2c8583;color:#fff}.danger{background:#bd241a;color:#fff}.purple{background:#6d3fd1;color:#fff}
-.file-label{background:#e8eef3;color:#173f5f}
-.hidden{display:none!important}
-.header{background:linear-gradient(135deg,#164b70,#247b96);color:#fff;padding:18px;border-radius:14px;margin-bottom:12px}
-.header h1{margin:0 0 3px;font-size:26px}.header p{margin:0;font-weight:700;opacity:.92}
-.add-panel{background:#fff;border:1px solid #d5e0e8;border-radius:12px;padding:10px;margin-bottom:12px}
-.add-grid{display:grid;grid-template-columns:1fr .8fr 1.4fr 1.1fr 1.5fr auto;gap:8px;align-items:end}
-label{display:block;font-size:12px;font-weight:800;color:#667085;margin-bottom:3px}
-input,select{width:100%;min-height:42px;border:1px solid #b8c5d1;border-radius:8px;padding:8px 10px;font:700 15px Tahoma,Arial;background:#fff;color:#111827}
-.multi-select-box{border:1px solid #b8c5d1;border-radius:8px;background:#fff;padding:5px 7px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 8px}
-.multi-option{display:flex;align-items:center;gap:5px;padding:3px 2px;border-bottom:1px solid #edf1f4;font-size:12px;font-weight:700;min-height:26px;margin:0}
-.multi-option input{width:15px;height:15px;min-height:auto;margin:0}
-.note{font-size:11px;color:#667085;margin-top:6px}
-.day-card{background:#fff;border:1px solid #bfd0df;border-radius:10px;margin-bottom:8px;overflow:hidden}
-.day-header{background:#e8f1f7;border-bottom:1px solid #bfd0df;padding:8px 12px}
-.date{font-size:17px;font-weight:800;color:#073b66}
-.case{display:grid;grid-template-columns:115px 1.5fr 1.2fr 1.1fr auto;gap:9px;align-items:center;padding:9px 12px}
-.case+.case{border-top:1px solid #e5edf3}
-.time-box{background:#fff6e7;border:1px solid #efc879;color:#995800;border-radius:8px;padding:7px;text-align:center;font-weight:800;white-space:nowrap}
-.procedure{font-size:16px;font-weight:800;color:#111}
-.meta-box{border-radius:8px;padding:6px 8px;font-size:12px;font-weight:700}
-.prep-box{background:#eef7ff;border:1px solid #b5d6f1;color:#164b72}
-.responsible-box{background:#f3efff;border:1px solid #d7c7ff;color:#4b2f84}
-.meta-label{display:block;font-size:9px;color:#667085;margin-bottom:2px}
-.prep-tags{display:flex;flex-wrap:wrap;gap:3px}
-.prep-tag{display:inline-block;background:#dceeff;border:1px solid #9dc7e5;color:#15496d;border-radius:999px;font-size:10px;padding:2px 5px;font-weight:800}
-.actions{display:flex;gap:5px}.actions button{padding:7px 9px;font-size:12px}
-.edit-row{display:grid;grid-template-columns:125px 1.3fr 1fr 1.4fr auto auto;gap:7px;width:100%;align-items:center}
-
-@media(max-width:750px){
- .page{width:calc(100% - 8px);margin:4px auto 12px}
- .toolbar{gap:6px}
- .toolbar button,.file-label{flex:1 1 calc(50% - 6px);min-height:46px;font-size:14px;text-align:center}
- .header{padding:14px 12px}.header h1{font-size:20px}.header p{font-size:13px}
- .add-grid,.case,.edit-row{grid-template-columns:1fr}
- .actions{justify-content:stretch}.actions button{flex:1;min-height:44px}
- input,select{font-size:16px;min-height:46px}
- .multi-select-box{grid-template-columns:1fr 1fr}
- .multi-option{font-size:11.5px;min-height:30px}
- .time-box{text-align:right}
- .procedure{font-size:17px}
+body{margin:0;font-family:Tahoma,Arial,"Segoe UI",sans-serif;background:#f3f6f9;color:#1f2937;line-height:1.6}
+.page{width:min(1150px,calc(100% - 24px));margin:20px auto}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+button,.file-label{border:0;padding:10px 14px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer}
+.primary{background:#173f5f;color:#fff}.secondary{background:#e8eef3;color:#173f5f}.success{background:#2c7a7b;color:#fff}.danger{background:#b42318;color:#fff}.purple{background:#6941c6;color:#fff}
+.file-label{display:inline-block;background:#e8eef3;color:#173f5f}
+.header{background:linear-gradient(135deg,#173f5f,#206a8a);color:#fff;padding:22px;border-radius:16px;box-shadow:0 8px 24px rgba(23,63,95,.16);margin-bottom:16px}
+.header h1{margin:0 0 4px;font-size:29px}.header p{margin:0;opacity:.92;font-size:16px;font-weight:600}
+.add-panel{background:#fff;border:1px solid #dbe3ea;border-radius:12px;padding:10px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.add-grid{display:grid;grid-template-columns:1.05fr .85fr 1.5fr 1.15fr 1.35fr auto;gap:10px;align-items:end}
+label{font-size:12px;font-weight:700;color:#667085;display:block;margin-bottom:4px}
+input,select{
+  width:100%;padding:8px 10px;border:1px solid #b8c5d1;border-radius:8px;
+  font-family:Tahoma,Arial,"Segoe UI",sans-serif;font-size:15px;font-weight:700;color:#111827;
+  background:#fff;min-height:40px
+}
+.day-card{background:#fff;border:1px solid #dbe3ea;border-radius:14px;margin-bottom:14px;overflow:hidden;box-shadow:0 5px 16px rgba(0,0,0,.06);break-inside:avoid}
+.day-header{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px 14px;background:#eef4f7;border-bottom:1px solid #dbe3ea}
+.date{font-size:19px;font-weight:800;color:#173f5f}
+.case{display:grid;grid-template-columns:145px 1.4fr 1.15fr 1.15fr auto;gap:12px;align-items:center;padding:13px 14px}
+.case+.case{border-top:1px solid #edf1f4}
+.time-box{background:#fff7e8;color:#9a5b00;border:1px solid #f2d59a;padding:9px 10px;border-radius:10px;text-align:center;font-weight:800}
+.procedure{font-size:17px;font-weight:800}
+.meta-box{background:#f8fafc;border:1px solid #dbe3ea;padding:8px 10px;border-radius:10px;font-size:14px;font-weight:700}
+.multi-select-box{
+  border:1px solid #b8c5d1;
+  border-radius:8px;
+  background:#fff;
+  padding:5px 7px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0 10px;
+  max-height:none;
+  overflow:visible;
+}
+.multi-option{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  padding:3px 2px;
+  border-bottom:1px solid #edf1f4;
+  font-size:12px;
+  font-weight:700;
+  line-height:1.25;
+  margin:0;
+  min-height:26px;
+}
+.multi-option input{
+  width:15px;
+  height:15px;
+  min-height:auto;
+  margin:0;
+  flex:0 0 auto;
+}
+.multi-option span{
+  white-space:normal;
+}
+.prep-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+}
+.prep-tag{
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:999px;
+  background:#dff0ff;
+  border:1px solid #a9cfee;
+  color:#184b75;
+  font-size:12px;
+  font-weight:800;
+}
+.meta-label{display:block;font-size:11px;color:#667085;margin-bottom:2px}
+.prep-box{background:#eef6ff;border-color:#bfd7f3;color:#184b75}
+.responsible-box{background:#f4f0ff;border-color:#d8c9ff;color:#4b2f84}
+.actions{display:flex;gap:6px}.actions button{padding:9px 13px;font-size:13px;font-weight:800}
+.empty{background:#fff;border:1px dashed #b9c4cf;border-radius:12px;padding:26px;text-align:center;color:#667085}
+.note{font-size:12px;color:#667085;margin-top:8px}.hidden{display:none!important}
+.edit-row{display:grid;grid-template-columns:145px minmax(250px,1.4fr) minmax(180px,1fr) minmax(190px,1fr) auto auto;gap:8px;width:100%;align-items:center}
+.edit-row input,.edit-row select{font-size:18px;font-weight:800;min-height:52px}
+.edit-row button{min-height:48px;padding:10px 16px;font-size:15px}
+@media(max-width:900px){
+  .add-grid{grid-template-columns:1fr 1fr}
+  .case{grid-template-columns:1fr 1fr}
+  .procedure{grid-column:1/-1}
+  .actions{grid-column:1/-1}
+  .edit-row{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  .page{width:min(100% - 10px,1150px);margin:6px auto 14px}
+  .header{padding:14px 12px;border-radius:10px}.header h1{font-size:21px}
+  .add-grid,.case,.edit-row{grid-template-columns:1fr}
+  .procedure,.actions{grid-column:auto}
+  .actions{justify-content:flex-start}
+  .edit-row input,.edit-row select{width:100%;min-width:0;font-size:16px;min-height:44px}
+  .edit-row button{width:100%;font-size:14px}
+  .time-box{text-align:right}
+  .multi-select-box{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .multi-option{font-size:11.5px;min-height:24px;padding:2px}
+}
+@media(max-width:420px){
+  .multi-select-box{grid-template-columns:1fr 1fr;gap:0 6px}
+  .multi-option{font-size:11px}
 }
 @page{size:A4;margin:12mm}
 @media print{
- body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
- .page{width:100%;margin:0}
- .toolbar,.add-panel,.actions,.note,.responsible-box{display:none!important}
- .header{background:linear-gradient(135deg,#123a5a,#2b7a9b)!important;color:#fff!important;border-radius:10px;padding:13px 16px;margin-bottom:10px}
- .header h1{font-size:23px}.header p{font-size:13px}
- .day-card{margin-bottom:8px;break-inside:avoid}
- .day-header{background:#e8f1f7!important}
- .case{grid-template-columns:110px minmax(0,1fr) 165px!important;gap:10px;padding:8px 12px;min-height:58px}
- .time-box{grid-column:1;background:#fff6e7!important;border-color:#efc879!important;color:#995800!important;font-size:13px}
- .procedure{grid-column:2;font-size:15px}
- .prep-box{grid-column:3;background:#eef7ff!important;border-color:#b5d6f1!important;color:#164b72!important}
+  body{
+    background:#fff;
+    color:#102a43;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  .page{
+    width:100%;
+    margin:0;
+  }
+
+  .toolbar,
+  .add-panel,
+  .actions,
+  .note,
+  .responsible-box{
+    display:none!important;
+  }
+
+  /* Keep the main title colored */
+  .header{
+    background:linear-gradient(135deg,#123a5a,#2b7a9b)!important;
+    color:#fff!important;
+    box-shadow:none;
+    border-radius:10px;
+    padding:13px 16px;
+    margin-bottom:10px;
+  }
+
+  .header h1{
+    font-size:23px;
+    margin:0 0 2px;
+  }
+
+  .header p{
+    font-size:13px;
+    margin:0;
+  }
+
+  /* Old compact card layout */
+  .day-card{
+    box-shadow:none;
+    margin-bottom:8px;
+    border:1px solid #c5d7e6;
+    border-radius:10px;
+    overflow:hidden;
+    break-inside:avoid;
+  }
+
+  /* Keep the day/date header color */
+  .day-header{
+    background:#e8f1f7!important;
+    border-bottom:1px solid #c5d7e6;
+    padding:7px 12px;
+  }
+
+  .date{
+    color:#073b66!important;
+    font-size:16px;
+    font-weight:800;
+  }
+
+  /* Horizontal row like the old PDF:
+     time on right, operation in center, preparation on left */
+  .case{
+    display:grid!important;
+    grid-template-columns:110px minmax(0,1fr) 165px!important;
+    gap:10px!important;
+    align-items:center!important;
+    padding:8px 12px!important;
+    min-height:58px;
+  }
+
+  .case + .case{
+    border-top:1px solid #e5edf3;
+  }
+
+  .time-box{
+    grid-column:1!important;
+    background:#fff6e7!important;
+    border:1px solid #efc879!important;
+    color:#995800!important;
+    border-radius:8px;
+    padding:6px 7px!important;
+    font-size:13px!important;
+    font-weight:800;
+    text-align:center;
+    white-space:nowrap;
+  }
+
+  .procedure{
+    grid-column:2!important;
+    font-size:15px!important;
+    font-weight:800!important;
+    color:#111!important;
+    text-align:right;
+    line-height:1.35;
+  }
+
+  .prep-box{
+    grid-column:3!important;
+    background:#eef7ff!important;
+    border:1px solid #b5d6f1!important;
+    color:#164b72!important;
+    border-radius:8px;
+    padding:6px 8px!important;
+    min-height:44px;
+    font-size:11px!important;
+    text-align:center;
+  }
+
+  .meta-label{
+    display:block;
+    font-size:8px!important;
+    color:#617487!important;
+    margin-bottom:2px;
+  }
+
+  .prep-tags{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:3px!important;
+  }
+
+  .prep-tag{
+    background:#dceeff!important;
+    border:1px solid #9dc7e5!important;
+    color:#15496d!important;
+    border-radius:999px;
+    font-size:9px!important;
+    padding:2px 5px!important;
+    line-height:1.25;
+  }
 }
 </style>
 </head>
 <body>
 <main class="page">
-
-<div class="toolbar">
-  <button class="primary" onclick="window.print()">طباعة القائمة</button>
-  <button id="pastToggleBtn" class="secondary" onclick="togglePastDays()">عرض الأيام السابقة</button>
-  <button class="purple" onclick="addResponsibleName()">إضافة اسم مسئول</button>
-  <button class="success" onclick="addPreparationItem()">إضافة بند تجهيز</button>
-  <button class="secondary" onclick="exportData()">تصدير نسخة احتياطية</button>
-  <label class="file-label">استيراد نسخة احتياطية
-    <input id="importFile" type="file" accept=".json" class="hidden" onchange="importData(event)">
-  </label>
-  <button class="danger" onclick="resetData()">استعادة القائمة الأصلية</button>
-</div>
-
-<section class="header">
-  <h1>قائمة العمليات القادمة - أ.د. على قطب</h1>
-  <p>جراحة المخ والأعصاب</p>
-</section>
-
-<section class="add-panel">
-  <div class="add-grid">
-    <div><label>التاريخ</label><input id="newDate" type="date"></div>
-    <div><label>الوقت</label><input id="newTime" type="time"></div>
-    <div><label>العملية</label><input id="newProcedure" type="text" placeholder="اكتب اسم العملية"></div>
-    <div><label>المسئول عن تجهيز المريض</label><select id="newResponsible"></select></div>
-    <div><label>المطلوب تجهيزُه للمريض</label><div id="newPreparation" class="multi-select-box"></div></div>
-    <div><button class="success" onclick="addCase()">إضافة موعد</button></div>
+  <div class="toolbar">
+    <button class="primary" onclick="window.print()">طباعة القائمة</button>
+    <button id="pastToggleBtn" class="secondary" onclick="togglePastDays()">عرض الأيام السابقة</button>
+    <button class="purple" onclick="addResponsibleName()">إضافة اسم مسئول</button>
+    <button class="success" onclick="addPreparationItem()">إضافة بند تجهيز</button>
+    <button class="secondary" onclick="exportData()">تصدير نسخة احتياطية</button>
+    <label class="file-label">استيراد نسخة احتياطية
+      <input id="importFile" type="file" accept=".json" class="hidden" onchange="importData(event)">
+    </label>
+    <button class="danger" onclick="resetData()">استعادة القائمة الأصلية</button>
   </div>
-  <div class="note" id="storageNote">على iPhone: عارض Files قد يعرض الصفحة فقط. للتعديل الكامل افتح الملف في Safari. القائمة نفسها ستظل ظاهرة حتى إذا لم يعمل JavaScript.</div>
-</section>
 
-<!-- Static fallback: visible even if iPhone Quick Look does not execute JavaScript -->
-<div id="schedule">
-  <section class="day-card">
-    <div class="day-header"><div class="date">الأربعاء 23/09/2026</div></div>
-    <div class="case">
-      <div class="time-box">3:00 مساءً</div>
-      <div class="procedure">ورم بالمخ و الملاح</div>
-      <div class="meta-box prep-box"><span class="meta-label">المطلوب تجهيزُه للمريض</span>—</div>
-      <div class="meta-box responsible-box"><span class="meta-label">المسئول عن تجهيز المريض</span>—</div>
-      <div class="actions"></div>
-    </div>
+  <section class="header">
+    <h1>قائمة العمليات القادمة - أ.د. على قطب</h1>
+    <p>جراحة المخ والأعصاب</p>
   </section>
 
-  <section class="day-card">
-    <div class="day-header"><div class="date">السبت 26/09/2026</div></div>
-    <div class="case">
-      <div class="time-box">12:00 ظهرًا</div>
-      <div class="procedure">غضروف قطني</div>
-      <div class="meta-box prep-box"><span class="meta-label">المطلوب تجهيزُه للمريض</span>—</div>
-      <div class="meta-box responsible-box"><span class="meta-label">المسئول عن تجهيز المريض</span>—</div>
-      <div class="actions"></div>
+  <section class="add-panel">
+    <div class="add-grid">
+      <div><label>التاريخ</label><input id="newDate" type="date"></div>
+      <div><label>الوقت</label><input id="newTime" type="time"></div>
+      <div><label>العملية</label><input id="newProcedure" type="text" placeholder="اكتب اسم العملية"></div>
+      <div>
+        <label>المسئول عن تجهيز المريض</label>
+        <select id="newResponsible"></select>
+      </div>
+      <div>
+        <label>المطلوب تجهيزُه للمريض</label>
+        <div id="newPreparation" class="multi-select-box"></div>
+      </div>
+      <div><button class="success" onclick="addCase()">إضافة موعد</button></div>
     </div>
-    <div class="case">
-      <div class="time-box">4:00 مساءً</div>
-      <div class="procedure">ورم</div>
-      <div class="meta-box prep-box"><span class="meta-label">المطلوب تجهيزُه للمريض</span>—</div>
-      <div class="meta-box responsible-box"><span class="meta-label">المسئول عن تجهيز المريض</span>—</div>
-      <div class="actions"></div>
-    </div>
+    <div class="note">المواعيد السابقة تظل محفوظة لكنها لا تظهر. خانة المسئول للاستخدام الداخلي ولا تظهر في الطباعة. يمكنك إضافة أسماء مسئولين أو بنود تجهيز جديدة من الأزرار أعلى الصفحة.</div>
   </section>
 
-  <section class="day-card">
-    <div class="day-header"><div class="date">الاثنين 28/09/2026</div></div>
-    <div class="case">
-      <div class="time-box">12:00 ظهرًا</div>
-      <div class="procedure">ورم فقرات عنقية</div>
-      <div class="meta-box prep-box"><span class="meta-label">المطلوب تجهيزُه للمريض</span>—</div>
-      <div class="meta-box responsible-box"><span class="meta-label">المسئول عن تجهيز المريض</span>—</div>
-      <div class="actions"></div>
-    </div>
-    <div class="case">
-      <div class="time-box">5:00 مساءً</div>
-      <div class="procedure">صمام بالمخ</div>
-      <div class="meta-box prep-box"><span class="meta-label">المطلوب تجهيزُه للمريض</span>—</div>
-      <div class="meta-box responsible-box"><span class="meta-label">المسئول عن تجهيز المريض</span>—</div>
-      <div class="actions"></div>
-    </div>
-  </section>
-
-  <section class="day-card">
-    <div class="day-header"><div class="date">الأربعاء 30/09/2026</div></div>
-    <div class="case">
-      <div class="time-box">10:00 صباحًا</div>
-      <div class="procedure">تركيب صمام بين العنق والبريتون</div>
-      <div class="meta-box prep-box"><span class="meta-label">المطلوب تجهيزُه للمريض</span>—</div>
-      <div class="meta-box responsible-box"><span class="meta-label">المسئول عن تجهيز المريض</span>—</div>
-      <div class="actions"></div>
-    </div>
-  </section>
-</div>
+  <div id="schedule"></div>
 </main>
 
 <script>
-(function(){
-var STORAGE_KEY='neurosurgery_operative_list_v3';
-var RESPONSIBLES_KEY='neurosurgery_responsibles_v3';
-var PREPARATIONS_KEY='neurosurgery_preparations_v3';
+const STORAGE_KEY='neurosurgery_operative_list_v2';
+const RESPONSIBLES_KEY='neurosurgery_responsibles_v2';
+const PREPARATIONS_KEY='neurosurgery_preparations_v2';
 
-var initialData=[
+const initialData=[
 {id:1,date:'2026-09-23',time:'15:00',procedure:'ورم بالمخ و الملاح',responsible:'',preparation:[]},
 {id:2,date:'2026-09-26',time:'12:00',procedure:'غضروف قطني',responsible:'',preparation:[]},
 {id:3,date:'2026-09-26',time:'16:00',procedure:'ورم',responsible:'',preparation:[]},
@@ -177,8 +304,8 @@ var initialData=[
 {id:6,date:'2026-09-30',time:'10:00',procedure:'تركيب صمام بين العنق والبريتون',responsible:'',preparation:[]}
 ];
 
-var defaultResponsibles=['أستاذ جمال عمر','مس ماجدة فؤاد'];
-var defaultPreparations=[
+const defaultResponsibles=['أستاذ جمال عمر','مس ماجدة فؤاد'];
+const defaultPreparations=[
 'عرض تخدير',
 'حجز ميعاد عملية',
 'شرائح و مسامير',
@@ -193,200 +320,209 @@ var defaultPreparations=[
 'مقطعية جيوب أنفية'
 ];
 
-function clone(o){return JSON.parse(JSON.stringify(o));}
-function safeGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
-function safeSet(k,v){try{localStorage.setItem(k,v);return true;}catch(e){return false;}}
-function esc(s){
- s=String(s==null?'':s);
- return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
-}
-function normalizeItem(x){
- x=x||{};
- return {
-   id:x.id||new Date().getTime(),
-   date:x.date||'',
-   time:x.time||'',
-   procedure:x.procedure||'',
-   responsible:x.responsible||'',
-   preparation:Object.prototype.toString.call(x.preparation)==='[object Array]'?x.preparation:(x.preparation?[x.preparation]:[])
- };
-}
+let data=loadData();
+let responsibles=loadList(RESPONSIBLES_KEY,defaultResponsibles);
+let preparations=loadList(PREPARATIONS_KEY,defaultPreparations);
+let editingId=null;
+let showPastDays=false;
+
 function loadData(){
- var s=safeGet(STORAGE_KEY),a,i,out=[];
- if(!s)return clone(initialData);
- try{a=JSON.parse(s);if(!a || Object.prototype.toString.call(a)!=='[object Array]')return clone(initialData);
-   for(i=0;i<a.length;i++)out.push(normalizeItem(a[i]));return out;
- }catch(e){return clone(initialData);}
+  try{
+    const s=localStorage.getItem(STORAGE_KEY);
+    const arr=s?JSON.parse(s):JSON.parse(JSON.stringify(initialData));
+    return Array.isArray(arr)?arr.map(x=>({...x,responsible:x.responsible||'',preparation:Array.isArray(x.preparation)?x.preparation:(x.preparation?[x.preparation]:[])})):JSON.parse(JSON.stringify(initialData));
+  }catch(e){return JSON.parse(JSON.stringify(initialData));}
 }
-function loadList(k,d){
- var s=safeGet(k),a;
- if(!s)return clone(d);
- try{a=JSON.parse(s);return a&&a.length?a:clone(d);}catch(e){return clone(d);}
+function loadList(key,defaults){
+  try{
+    const s=localStorage.getItem(key);
+    const arr=s?JSON.parse(s):defaults;
+    return Array.isArray(arr)&&arr.length?arr:defaults;
+  }catch(e){return defaults;}
 }
-
-var data=loadData();
-var responsibles=loadList(RESPONSIBLES_KEY,defaultResponsibles);
-var preparations=loadList(PREPARATIONS_KEY,defaultPreparations);
-var editingId=null;
-var showPastDays=false;
-
 function saveAll(){
- safeSet(STORAGE_KEY,JSON.stringify(data));
- safeSet(RESPONSIBLES_KEY,JSON.stringify(responsibles));
- safeSet(PREPARATIONS_KEY,JSON.stringify(preparations));
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+  localStorage.setItem(RESPONSIBLES_KEY,JSON.stringify(responsibles));
+  localStorage.setItem(PREPARATIONS_KEY,JSON.stringify(preparations));
 }
-function formatDate(s){var p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
-function dayName(s){
- var d=new Date(s+'T12:00:00'),days=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
- return days[d.getDay()];
+function arabicDay(dateStr){const d=new Date(dateStr+'T12:00:00');return new Intl.DateTimeFormat('ar-EG',{weekday:'long'}).format(d);}
+function formatDate(dateStr){const [y,m,d]=dateStr.split('-');return `${d}/${m}/${y}`;}
+function formatTime(t){if(!t)return 'لم يُحدد';const [h,m]=t.split(':').map(Number);const p=h<12?'صباحًا':(h===12?'ظهرًا':'مساءً');const hh=h%12||12;return `${hh}:${String(m).padStart(2,'0')} ${p}`;}
+function esc(s){return String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");}
+function sortData(){data.sort((a,b)=>((a.date||'9999-12-31')+(a.time||'23:59')).localeCompare((b.date||'9999-12-31')+(b.time||'23:59')));}
+function optionHtml(list,selected,blankText){
+  let h=`<option value="">${esc(blankText)}</option>`;
+  list.forEach(v=>h+=`<option value="${esc(v)}"${v===selected?' selected':''}>${esc(v)}</option>`);
+  return h;
 }
-function formatTime(t){
- if(!t)return 'لم يُحدد';
- var p=t.split(':'),h=parseInt(p[0],10),m=p[1]||'00',period=h<12?'صباحًا':(h===12?'ظهرًا':'مساءً');
- var hh=h%12||12;return hh+':'+m+' '+period;
+function preparationCheckboxes(containerId, selected=[]){
+  const container=document.getElementById(containerId);
+  if(!container)return;
+  const values=Array.isArray(selected)?selected:[selected].filter(Boolean);
+  container.innerHTML=preparations.map((v,i)=>`
+    <label class="multi-option">
+      <input type="checkbox" value="${esc(v)}" ${values.includes(v)?'checked':''}>
+      <span>${esc(v)}</span>
+    </label>`).join('');
 }
-function optionHtml(list,sel,blank){
- var h='<option value="">'+esc(blank)+'</option>',i;
- for(i=0;i<list.length;i++)h+='<option value="'+esc(list[i])+'"'+(list[i]===sel?' selected':'')+'>'+esc(list[i])+'</option>';
- return h;
+function getCheckedPreparations(containerId){
+  const container=document.getElementById(containerId);
+  if(!container)return [];
+  return Array.from(container.querySelectorAll('input[type="checkbox"]:checked')).map(x=>x.value);
 }
-function checkboxes(containerId,selected){
- var c=document.getElementById(containerId),i,v,h='';
- if(!c)return;
- selected=selected||[];
- for(i=0;i<preparations.length;i++){
-   v=preparations[i];
-   h+='<label class="multi-option"><input type="checkbox" value="'+esc(v)+'"'+(selected.indexOf(v)>=0?' checked':'')+'><span>'+esc(v)+'</span></label>';
- }
- c.innerHTML=h;
-}
-function checked(containerId){
- var c=document.getElementById(containerId),nodes,out=[],i;
- if(!c)return out;
- nodes=c.querySelectorAll('input[type="checkbox"]:checked');
- for(i=0;i<nodes.length;i++)out.push(nodes[i].value);
- return out;
-}
-function refreshAdd(){
- document.getElementById('newResponsible').innerHTML=optionHtml(responsibles,'','-- اختر المسئول --');
- checkboxes('newPreparation',[]);
+function refreshAddSelects(){
+  document.getElementById('newResponsible').innerHTML=optionHtml(responsibles,'','-- اختر المسئول --');
+  preparationCheckboxes('newPreparation',[]);
 }
 function render(){
- var root=document.getElementById('schedule'),today=new Date(),vis=[],i,x,groups={},dates=[],date,rows,item,h='';
- today.setHours(0,0,0,0);
+  sortData();
+  const root=document.getElementById('schedule');
+  const today=new Date(); today.setHours(0,0,0,0);
+  const visibleData=data.filter(x=>{
+    if(!x.date) return false;
+    if(showPastDays) return true;
+    return new Date(x.date+'T00:00:00')>=today;
+  });
 
- data.sort(function(a,b){return ((a.date||'9999')+(a.time||'23:59')).localeCompare((b.date||'9999')+(b.time||'23:59'));});
- for(i=0;i<data.length;i++){
-   x=data[i];
-   if(!x.date)continue;
-   if(showPastDays || new Date(x.date+'T00:00:00')>=today)vis.push(x);
- }
- if(!vis.length){root.innerHTML='<div class="day-card"><div class="case">لا توجد عمليات اليوم أو خلال الأيام القادمة.</div></div>';return;}
+  if(!visibleData.length){
+    root.innerHTML='<div class="empty">'+(showPastDays?'لا توجد عمليات محفوظة.':'لا توجد عمليات اليوم أو خلال الأيام القادمة.')+'</div>';
+    return;
+  }
 
- for(i=0;i<vis.length;i++){date=vis[i].date;if(!groups[date]){groups[date]=[];dates.push(date);}groups[date].push(vis[i]);}
- dates.sort();
+  const grouped={};
+  visibleData.forEach(x=>(grouped[x.date]??=[]).push(x));
 
- for(i=0;i<dates.length;i++){
-   date=dates[i];
-   h+='<section class="day-card"><div class="day-header"><div class="date">'+dayName(date)+' '+formatDate(date)+'</div></div>';
-   rows=groups[date];
-   for(var j=0;j<rows.length;j++){
-     item=rows[j];
-     if(editingId===item.id){
-       h+='<div class="case"><div class="edit-row">'+
-       '<input id="et'+item.id+'" type="time" value="'+esc(item.time)+'">'+
-       '<input id="ep'+item.id+'" type="text" value="'+esc(item.procedure)+'">'+
-       '<select id="er'+item.id+'">'+optionHtml(responsibles,item.responsible,'-- اختر المسئول --')+'</select>'+
-       '<div id="epr'+item.id+'" class="multi-select-box"></div>'+
-       '<button class="success" onclick="saveEdit('+item.id+')">حفظ</button>'+
-       '<button class="secondary" onclick="cancelEdit()">إلغاء</button></div></div>';
-     }else{
-       var prep='—';
-       if(item.preparation && item.preparation.length){
-         prep='<div class="prep-tags">';
-         for(var k=0;k<item.preparation.length;k++)prep+='<span class="prep-tag">'+esc(item.preparation[k])+'</span>';
-         prep+='</div>';
-       }
-       h+='<div class="case">'+
-       '<div class="time-box">'+esc(formatTime(item.time))+'</div>'+
-       '<div class="procedure">'+esc(item.procedure)+'</div>'+
-       '<div class="meta-box prep-box"><span class="meta-label">المطلوب تجهيزُه للمريض</span>'+prep+'</div>'+
-       '<div class="meta-box responsible-box"><span class="meta-label">المسئول عن تجهيز المريض</span>'+(item.responsible?esc(item.responsible):'—')+'</div>'+
-       '<div class="actions"><button class="secondary" onclick="startEdit('+item.id+')">تعديل</button><button class="danger" onclick="deleteCase('+item.id+')">حذف</button></div>'+
-       '</div>';
-     }
-   }
-   h+='</section>';
- }
- root.innerHTML=h;
- if(editingId!==null){
-   for(i=0;i<data.length;i++)if(data[i].id===editingId){checkboxes('epr'+editingId,data[i].preparation||[]);break;}
- }
+  root.innerHTML=Object.keys(grouped).sort().map(date=>{
+    const rows=grouped[date].map(item=>{
+      if(editingId===item.id){
+        return `<div class="case"><div class="edit-row">
+          <input id="editTime_${item.id}" type="time" value="${esc(item.time)}">
+          <input id="editProc_${item.id}" type="text" value="${esc(item.procedure)}">
+          <select id="editResponsible_${item.id}">${optionHtml(responsibles,item.responsible,'-- اختر المسئول --')}</select>
+          <div id="editPreparation_${item.id}" class="multi-select-box"></div>
+          <button class="success" onclick="saveEdit(${item.id})">حفظ</button>
+          <button class="secondary" onclick="cancelEdit()">إلغاء</button>
+        </div></div>`;
+      }
+
+      return `<div class="case">
+        <div class="time-box">${esc(formatTime(item.time))}</div>
+        <div class="procedure">${esc(item.procedure)}</div>
+        <div class="meta-box prep-box">
+          <span class="meta-label">المطلوب تجهيزُه للمريض</span>
+          ${Array.isArray(item.preparation)&&item.preparation.length
+  ? `<div class="prep-tags">${item.preparation.map(p=>`<span class="prep-tag">${esc(p)}</span>`).join('')}</div>`
+  : '—'}
+        </div>
+        <div class="meta-box responsible-box">
+          <span class="meta-label">المسئول عن تجهيز المريض</span>
+          ${item.responsible?esc(item.responsible):'—'}
+        </div>
+        <div class="actions">
+          <button class="secondary" onclick="startEdit(${item.id})">تعديل</button>
+          <button class="danger" onclick="deleteCase(${item.id})">حذف</button>
+        </div>
+      </div>`;
+    }).join('');
+    return `<section class="day-card">
+      <div class="day-header"><div class="date">${esc(arabicDay(date))} ${esc(formatDate(date))}</div></div>
+      ${rows}
+    </section>`;
+  }).join('');
+
+  // Populate multi-select preparation controls for rows currently being edited
+  if(editingId!==null){
+    const item=data.find(x=>x.id===editingId);
+    if(item) preparationCheckboxes('editPreparation_'+editingId, item.preparation||[]);
+  }
 }
-window.togglePastDays=function(){
- showPastDays=!showPastDays;
- document.getElementById('pastToggleBtn').innerHTML=showPastDays?'إخفاء الأيام السابقة':'عرض الأيام السابقة';
- render();
-};
-window.addCase=function(){
- var d=document.getElementById('newDate').value,t=document.getElementById('newTime').value,p=document.getElementById('newProcedure').value;
- var r=document.getElementById('newResponsible').value,pr=checked('newPreparation');
- p=p.replace(/^\s+|\s+$/g,'');
- if(!d||!p){alert('يرجى إدخال التاريخ واسم العملية.');return;}
- data.push({id:new Date().getTime(),date:d,time:t,procedure:p,responsible:r,preparation:pr});
- saveAll();render();
- document.getElementById('newDate').value='';document.getElementById('newTime').value='';document.getElementById('newProcedure').value='';document.getElementById('newResponsible').value='';checkboxes('newPreparation',[]);
-};
-window.startEdit=function(id){editingId=id;render();};
-window.cancelEdit=function(){editingId=null;render();};
-window.saveEdit=function(id){
- var i,item;
- for(i=0;i<data.length;i++)if(data[i].id===id){item=data[i];break;}
- if(!item)return;
- item.time=document.getElementById('et'+id).value;
- item.procedure=document.getElementById('ep'+id).value.replace(/^\s+|\s+$/g,'');
- item.responsible=document.getElementById('er'+id).value;
- item.preparation=checked('epr'+id);
- if(!item.procedure){alert('اسم العملية مطلوب.');return;}
- editingId=null;saveAll();render();
-};
-window.deleteCase=function(id){
- if(!confirm('هل تريد حذف هذا الموعد؟'))return;
- var out=[],i;for(i=0;i<data.length;i++)if(data[i].id!==id)out.push(data[i]);
- data=out;saveAll();render();
-};
-window.addResponsibleName=function(){
- var n=prompt('اكتب اسم المسئول الجديد:');if(!n)return;n=n.replace(/^\s+|\s+$/g,'');if(!n)return;
- if(responsibles.indexOf(n)<0)responsibles.push(n);saveAll();refreshAdd();render();
-};
-window.addPreparationItem=function(){
- var n=prompt('اكتب بند التجهيز الجديد:');if(!n)return;n=n.replace(/^\s+|\s+$/g,'');if(!n)return;
- if(preparations.indexOf(n)<0)preparations.push(n);saveAll();refreshAdd();render();
-};
-window.resetData=function(){
- if(!confirm('سيتم حذف التعديلات واستعادة القائمة الأصلية. هل تريد المتابعة؟'))return;
- data=clone(initialData);responsibles=clone(defaultResponsibles);preparations=clone(defaultPreparations);
- saveAll();refreshAdd();render();
-};
-window.exportData=function(){
- var backup={version:3,data:data,responsibles:responsibles,preparations:preparations};
- var blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json;charset=utf-8'});
- var url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='operative-list-backup.json';a.click();setTimeout(function(){URL.revokeObjectURL(url);},500);
-};
-window.importData=function(e){
- var f=e.target.files[0];if(!f)return;var rd=new FileReader();
- rd.onload=function(){try{var o=JSON.parse(rd.result),arr,i,out=[];
-   if(Object.prototype.toString.call(o)==='[object Array]')arr=o;
-   else if(o&&Object.prototype.toString.call(o.data)==='[object Array]'){arr=o.data;if(o.responsibles)responsibles=o.responsibles;if(o.preparations)preparations=o.preparations;}
-   else throw new Error();
-   for(i=0;i<arr.length;i++)out.push(normalizeItem(arr[i]));data=out;saveAll();refreshAdd();render();alert('تم الاستيراد بنجاح.');
- }catch(err){alert('ملف النسخة الاحتياطية غير صالح.');}e.target.value='';};
- rd.readAsText(f,'utf-8');
-};
+function togglePastDays(){
+  showPastDays=!showPastDays;
+  const btn=document.getElementById('pastToggleBtn');
+  if(btn){
+    btn.textContent=showPastDays?'إخفاء الأيام السابقة':'عرض الأيام السابقة';
+  }
+  render();
+}
 
-refreshAdd();
+function addCase(){
+  const date=document.getElementById('newDate').value;
+  const time=document.getElementById('newTime').value;
+  const procedure=document.getElementById('newProcedure').value.trim();
+  const responsible=document.getElementById('newResponsible').value;
+  const preparation=getCheckedPreparations('newPreparation');
+  if(!date||!procedure){alert('يرجى إدخال التاريخ واسم العملية.');return;}
+  data.push({id:Date.now(),date,time,procedure,responsible,preparation});
+  saveAll(); render();
+  document.getElementById('newDate').value='';
+  document.getElementById('newTime').value='';
+  document.getElementById('newProcedure').value='';
+  document.getElementById('newResponsible').value='';
+  preparationCheckboxes('newPreparation',[]);
+}
+function startEdit(id){editingId=id;render();}
+function cancelEdit(){editingId=null;render();}
+function saveEdit(id){
+  const item=data.find(x=>x.id===id); if(!item)return;
+  item.time=document.getElementById('editTime_'+id).value;
+  item.procedure=document.getElementById('editProc_'+id).value.trim();
+  item.responsible=document.getElementById('editResponsible_'+id).value;
+  item.preparation=getCheckedPreparations('editPreparation_'+id);
+  if(!item.procedure){alert('اسم العملية مطلوب.');return;}
+  editingId=null; saveAll(); render();
+}
+function deleteCase(id){
+  if(!confirm('هل تريد حذف هذا الموعد؟'))return;
+  data=data.filter(x=>x.id!==id); saveAll(); render();
+}
+function addResponsibleName(){
+  const name=prompt('اكتب اسم المسئول الجديد:');
+  if(!name||!name.trim())return;
+  const v=name.trim();
+  if(!responsibles.includes(v))responsibles.push(v);
+  saveAll(); refreshAddSelects(); render();
+}
+function addPreparationItem(){
+  const name=prompt('اكتب بند التجهيز الجديد:');
+  if(!name||!name.trim())return;
+  const v=name.trim();
+  if(!preparations.includes(v))preparations.push(v);
+  saveAll(); refreshAddSelects(); render();
+}
+function resetData(){
+  if(!confirm('سيتم حذف التعديلات واستعادة القائمة والقوائم الأصلية. هل تريد المتابعة؟'))return;
+  data=JSON.parse(JSON.stringify(initialData));
+  responsibles=[...defaultResponsibles];
+  preparations=[...defaultPreparations];
+  saveAll(); refreshAddSelects(); render();
+}
+function exportData(){
+  const backup={version:2,data,responsibles,preparations};
+  const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json;charset=utf-8'});
+  const url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='operative-list-backup.json';a.click();URL.revokeObjectURL(url);
+}
+function importData(event){
+  const file=event.target.files[0]; if(!file)return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const imported=JSON.parse(reader.result);
+      if(Array.isArray(imported)){
+        data=imported.map(x=>({...x,responsible:x.responsible||'',preparation:Array.isArray(x.preparation)?x.preparation:(x.preparation?[x.preparation]:[])}));
+      }else if(imported && Array.isArray(imported.data)){
+        data=imported.data.map(x=>({...x,responsible:x.responsible||'',preparation:Array.isArray(x.preparation)?x.preparation:(x.preparation?[x.preparation]:[])}));
+        if(Array.isArray(imported.responsibles)&&imported.responsibles.length)responsibles=imported.responsibles;
+        if(Array.isArray(imported.preparations)&&imported.preparations.length)preparations=imported.preparations;
+      }else throw new Error();
+      saveAll(); refreshAddSelects(); render(); alert('تم استيراد القائمة بنجاح.');
+    }catch(e){alert('ملف النسخة الاحتياطية غير صالح.');}
+    event.target.value='';
+  };
+  reader.readAsText(file,'utf-8');
+}
+refreshAddSelects();
 render();
-})();
 </script>
 </body>
 </html>
