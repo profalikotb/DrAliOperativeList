@@ -1,148 +1,392 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>نظام حجز عمليات أ.د. على قطب</title>
-  <style>
-    :root { --primary: #1e3a8a; --accent: #25d366; --bg: #f1f5f9; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
-    .card { background: #fff; padding: 30px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); width: 94%; max-width: 420px; border-top: 12px solid var(--primary); }
-    h1 { color: var(--primary); text-align: center; font-size: 24px; margin-bottom: 25px; font-weight: 900; }
-    label { font-weight: 800; display: block; margin-top: 18px; color: #334155; font-size: 14px; }
-    input, textarea { width: 100%; padding: 15px; margin-top: 8px; border-radius: 12px; border: 2px solid #e2e8f0; box-sizing: border-box; font-size: 16px; transition: 0.3s; font-family: inherit; }
-    input:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1); }
-    .btn-group { margin-top: 30px; display: flex; flex-direction: column; gap: 12px; }
-    button { width: 100%; padding: 18px; border-radius: 16px; border: none; font-weight: 800; cursor: pointer; font-size: 17px; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; }
-    .btn-wa { background: var(--accent); color: white; }
-    .btn-img { background: var(--primary); color: white; }
-    button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); opacity: 0.95; }
-    canvas { display: none; }
-    #status { text-align:center; font-size:14px; color: var(--primary); margin-top:15px; font-weight: bold; min-height: 20px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>قائمة العمليات القادمة - أ.د. على قطب</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial,"Segoe UI",sans-serif;background:#f3f6f9;color:#1f2937;line-height:1.5}
+.page{width:min(1120px,calc(100% - 16px));margin:10px auto 20px}
+.toolbar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+button,.file-label{border:0;border-radius:9px;padding:10px 12px;font-size:14px;font-weight:800;cursor:pointer}
+.primary{background:#164b70;color:#fff}.secondary{background:#e8eef3;color:#173f5f}.success{background:#2c8583;color:#fff}.danger{background:#bd241a;color:#fff}.purple{background:#6d3fd1;color:#fff}
+.file-label{background:#e8eef3;color:#173f5f}
+.hidden{display:none!important}
+.header{background:linear-gradient(135deg,#164b70,#247b96);color:#fff;padding:18px;border-radius:14px;margin-bottom:12px}
+.header h1{margin:0 0 3px;font-size:26px}.header p{margin:0;font-weight:700;opacity:.92}
+.add-panel{background:#fff;border:1px solid #d5e0e8;border-radius:12px;padding:10px;margin-bottom:12px}
+.add-grid{display:grid;grid-template-columns:1fr .8fr 1.4fr 1.1fr 1.5fr auto;gap:8px;align-items:end}
+label{display:block;font-size:12px;font-weight:800;color:#667085;margin-bottom:3px}
+input,select{width:100%;min-height:42px;border:1px solid #b8c5d1;border-radius:8px;padding:8px 10px;font:700 15px Tahoma,Arial;background:#fff;color:#111827}
+.multi-select-box{border:1px solid #b8c5d1;border-radius:8px;background:#fff;padding:5px 7px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 8px}
+.multi-option{display:flex;align-items:center;gap:5px;padding:3px 2px;border-bottom:1px solid #edf1f4;font-size:12px;font-weight:700;min-height:26px;margin:0}
+.multi-option input{width:15px;height:15px;min-height:auto;margin:0}
+.note{font-size:11px;color:#667085;margin-top:6px}
+.day-card{background:#fff;border:1px solid #bfd0df;border-radius:10px;margin-bottom:8px;overflow:hidden}
+.day-header{background:#e8f1f7;border-bottom:1px solid #bfd0df;padding:8px 12px}
+.date{font-size:17px;font-weight:800;color:#073b66}
+.case{display:grid;grid-template-columns:115px 1.5fr 1.2fr 1.1fr auto;gap:9px;align-items:center;padding:9px 12px}
+.case+.case{border-top:1px solid #e5edf3}
+.time-box{background:#fff6e7;border:1px solid #efc879;color:#995800;border-radius:8px;padding:7px;text-align:center;font-weight:800;white-space:nowrap}
+.procedure{font-size:16px;font-weight:800;color:#111}
+.meta-box{border-radius:8px;padding:6px 8px;font-size:12px;font-weight:700}
+.prep-box{background:#eef7ff;border:1px solid #b5d6f1;color:#164b72}
+.responsible-box{background:#f3efff;border:1px solid #d7c7ff;color:#4b2f84}
+.meta-label{display:block;font-size:9px;color:#667085;margin-bottom:2px}
+.prep-tags{display:flex;flex-wrap:wrap;gap:3px}
+.prep-tag{display:inline-block;background:#dceeff;border:1px solid #9dc7e5;color:#15496d;border-radius:999px;font-size:10px;padding:2px 5px;font-weight:800}
+.actions{display:flex;gap:5px}.actions button{padding:7px 9px;font-size:12px}
+.edit-row{display:grid;grid-template-columns:125px 1.3fr 1fr 1.4fr auto auto;gap:7px;width:100%;align-items:center}
+
+@media(max-width:750px){
+ .page{width:calc(100% - 8px);margin:4px auto 12px}
+ .toolbar{gap:6px}
+ .toolbar button,.file-label{flex:1 1 calc(50% - 6px);min-height:46px;font-size:14px;text-align:center}
+ .header{padding:14px 12px}.header h1{font-size:20px}.header p{font-size:13px}
+ .add-grid,.case,.edit-row{grid-template-columns:1fr}
+ .actions{justify-content:stretch}.actions button{flex:1;min-height:44px}
+ input,select{font-size:16px;min-height:46px}
+ .multi-select-box{grid-template-columns:1fr 1fr}
+ .multi-option{font-size:11.5px;min-height:30px}
+ .time-box{text-align:right}
+ .procedure{font-size:17px}
+}
+@page{size:A4;margin:12mm}
+@media print{
+ body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .page{width:100%;margin:0}
+ .toolbar,.add-panel,.actions,.note,.responsible-box{display:none!important}
+ .header{background:linear-gradient(135deg,#123a5a,#2b7a9b)!important;color:#fff!important;border-radius:10px;padding:13px 16px;margin-bottom:10px}
+ .header h1{font-size:23px}.header p{font-size:13px}
+ .day-card{margin-bottom:8px;break-inside:avoid}
+ .day-header{background:#e8f1f7!important}
+ .case{grid-template-columns:110px minmax(0,1fr) 165px!important;gap:10px;padding:8px 12px;min-height:58px}
+ .time-box{grid-column:1;background:#fff6e7!important;border-color:#efc879!important;color:#995800!important;font-size:13px}
+ .procedure{grid-column:2;font-size:15px}
+ .prep-box{grid-column:3;background:#eef7ff!important;border-color:#b5d6f1!important;color:#164b72!important}
+}
+</style>
 </head>
 <body>
+<main class="page">
 
-<div class="card">
-  <h1>📌 طلب حجز عملية</h1>
-  
-  <label>👤 اسم المريض الكامل</label>
-  <input type="text" id="name" placeholder="ادخل اسم المريض هنا...">
-
-  <label>🧠 التشخيص الطبي (التفاصيل)</label>
-  <textarea id="dx" rows="3" placeholder="اكتب التشخيص كاملاً هنا..."></textarea>
-
-  <div class="btn-group">
-    <button class="btn-img" onclick="generateImage()">✨ إنشاء كارت ذكي (نسخ)</button>
-    <button class="btn-wa" onclick="sendWhatsApp()">💬 إرسال واتساب</button>
-  </div>
-  
-  <p id="status"></p>
+<div class="toolbar">
+  <button class="primary" onclick="window.print()">طباعة القائمة</button>
+  <button id="pastToggleBtn" class="secondary" onclick="togglePastDays()">عرض الأيام السابقة</button>
+  <button class="purple" onclick="addResponsibleName()">إضافة اسم مسئول</button>
+  <button class="success" onclick="addPreparationItem()">إضافة بند تجهيز</button>
+  <button class="secondary" onclick="exportData()">تصدير نسخة احتياطية</button>
+  <label class="file-label">استيراد نسخة احتياطية
+    <input id="importFile" type="file" accept=".json" class="hidden" onchange="importData(event)">
+  </label>
+  <button class="danger" onclick="resetData()">استعادة القائمة الأصلية</button>
 </div>
 
-<canvas id="medicalCanvas" width="600" height="600"></canvas>
+<section class="header">
+  <h1>قائمة العمليات القادمة - أ.د. على قطب</h1>
+  <p>جراحة المخ والأعصاب</p>
+</section>
+
+<section class="add-panel">
+  <div class="add-grid">
+    <div><label>التاريخ</label><input id="newDate" type="date"></div>
+    <div><label>الوقت</label><input id="newTime" type="time"></div>
+    <div><label>العملية</label><input id="newProcedure" type="text" placeholder="اكتب اسم العملية"></div>
+    <div><label>المسئول عن تجهيز المريض</label><select id="newResponsible"></select></div>
+    <div><label>المطلوب تجهيزُه للمريض</label><div id="newPreparation" class="multi-select-box"></div></div>
+    <div><button class="success" onclick="addCase()">إضافة موعد</button></div>
+  </div>
+  <div class="note" id="storageNote">على iPhone: عارض Files قد يعرض الصفحة فقط. للتعديل الكامل افتح الملف في Safari. القائمة نفسها ستظل ظاهرة حتى إذا لم يعمل JavaScript.</div>
+</section>
+
+<!-- Static fallback: visible even if iPhone Quick Look does not execute JavaScript -->
+<div id="schedule">
+  <section class="day-card">
+    <div class="day-header"><div class="date">الأربعاء 23/09/2026</div></div>
+    <div class="case">
+      <div class="time-box">3:00 مساءً</div>
+      <div class="procedure">ورم بالمخ و الملاح</div>
+      <div class="meta-box prep-box"><span class="meta-label">المطلوب تجهيزُه للمريض</span>—</div>
+      <div class="meta-box responsible-box"><span class="meta-label">المسئول عن تجهيز المريض</span>—</div>
+      <div class="actions"></div>
+    </div>
+  </section>
+
+  <section class="day-card">
+    <div class="day-header"><div class="date">السبت 26/09/2026</div></div>
+    <div class="case">
+      <div class="time-box">12:00 ظهرًا</div>
+      <div class="procedure">غضروف قطني</div>
+      <div class="meta-box prep-box"><span class="meta-label">المطلوب تجهيزُه للمريض</span>—</div>
+      <div class="meta-box responsible-box"><span class="meta-label">المسئول عن تجهيز المريض</span>—</div>
+      <div class="actions"></div>
+    </div>
+    <div class="case">
+      <div class="time-box">4:00 مساءً</div>
+      <div class="procedure">ورم</div>
+      <div class="meta-box prep-box"><span class="meta-label">المطلوب تجهيزُه للمريض</span>—</div>
+      <div class="meta-box responsible-box"><span class="meta-label">المسئول عن تجهيز المريض</span>—</div>
+      <div class="actions"></div>
+    </div>
+  </section>
+
+  <section class="day-card">
+    <div class="day-header"><div class="date">الاثنين 28/09/2026</div></div>
+    <div class="case">
+      <div class="time-box">12:00 ظهرًا</div>
+      <div class="procedure">ورم فقرات عنقية</div>
+      <div class="meta-box prep-box"><span class="meta-label">المطلوب تجهيزُه للمريض</span>—</div>
+      <div class="meta-box responsible-box"><span class="meta-label">المسئول عن تجهيز المريض</span>—</div>
+      <div class="actions"></div>
+    </div>
+    <div class="case">
+      <div class="time-box">5:00 مساءً</div>
+      <div class="procedure">صمام بالمخ</div>
+      <div class="meta-box prep-box"><span class="meta-label">المطلوب تجهيزُه للمريض</span>—</div>
+      <div class="meta-box responsible-box"><span class="meta-label">المسئول عن تجهيز المريض</span>—</div>
+      <div class="actions"></div>
+    </div>
+  </section>
+
+  <section class="day-card">
+    <div class="day-header"><div class="date">الأربعاء 30/09/2026</div></div>
+    <div class="case">
+      <div class="time-box">10:00 صباحًا</div>
+      <div class="procedure">تركيب صمام بين العنق والبريتون</div>
+      <div class="meta-box prep-box"><span class="meta-label">المطلوب تجهيزُه للمريض</span>—</div>
+      <div class="meta-box responsible-box"><span class="meta-label">المسئول عن تجهيز المريض</span>—</div>
+      <div class="actions"></div>
+    </div>
+  </section>
+</div>
+</main>
 
 <script>
-function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
-    const words = text.split(' ');
-    let line = '';
-    for(let n = 0; n < words.length; n++) {
-        let testLine = line + words[n] + ' ';
-        let metrics = ctx.measureText(testLine);
-        let testWidth = metrics.width;
-        if (testWidth > maxWidth && n > 0) {
-            ctx.fillText(line, x, y);
-            line = words[n] + ' ';
-            y += lineHeight;
-        } else {
-            line = testLine;
-        }
-    }
-    ctx.fillText(line, x, y);
-    return y;
+(function(){
+var STORAGE_KEY='neurosurgery_operative_list_v3';
+var RESPONSIBLES_KEY='neurosurgery_responsibles_v3';
+var PREPARATIONS_KEY='neurosurgery_preparations_v3';
+
+var initialData=[
+{id:1,date:'2026-09-23',time:'15:00',procedure:'ورم بالمخ و الملاح',responsible:'',preparation:[]},
+{id:2,date:'2026-09-26',time:'12:00',procedure:'غضروف قطني',responsible:'',preparation:[]},
+{id:3,date:'2026-09-26',time:'16:00',procedure:'ورم',responsible:'',preparation:[]},
+{id:4,date:'2026-09-28',time:'12:00',procedure:'ورم فقرات عنقية',responsible:'',preparation:[]},
+{id:5,date:'2026-09-28',time:'17:00',procedure:'صمام بالمخ',responsible:'',preparation:[]},
+{id:6,date:'2026-09-30',time:'10:00',procedure:'تركيب صمام بين العنق والبريتون',responsible:'',preparation:[]}
+];
+
+var defaultResponsibles=['أستاذ جمال عمر','مس ماجدة فؤاد'];
+var defaultPreparations=[
+'عرض تخدير',
+'حجز ميعاد عملية',
+'شرائح و مسامير',
+'حجزملاح',
+'رنين ملاحي',
+'عرض قلب',
+'صمام مخ',
+'صمام قطني',
+'أقفاص',
+'مراقبةالأعصاب',
+'فاتورة شاملة',
+'مقطعية جيوب أنفية'
+];
+
+function clone(o){return JSON.parse(JSON.stringify(o));}
+function safeGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function safeSet(k,v){try{localStorage.setItem(k,v);return true;}catch(e){return false;}}
+function esc(s){
+ s=String(s==null?'':s);
+ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}
+function normalizeItem(x){
+ x=x||{};
+ return {
+   id:x.id||new Date().getTime(),
+   date:x.date||'',
+   time:x.time||'',
+   procedure:x.procedure||'',
+   responsible:x.responsible||'',
+   preparation:Object.prototype.toString.call(x.preparation)==='[object Array]'?x.preparation:(x.preparation?[x.preparation]:[])
+ };
+}
+function loadData(){
+ var s=safeGet(STORAGE_KEY),a,i,out=[];
+ if(!s)return clone(initialData);
+ try{a=JSON.parse(s);if(!a || Object.prototype.toString.call(a)!=='[object Array]')return clone(initialData);
+   for(i=0;i<a.length;i++)out.push(normalizeItem(a[i]));return out;
+ }catch(e){return clone(initialData);}
+}
+function loadList(k,d){
+ var s=safeGet(k),a;
+ if(!s)return clone(d);
+ try{a=JSON.parse(s);return a&&a.length?a:clone(d);}catch(e){return clone(d);}
 }
 
-function generateImage() {
-    const name = document.getElementById("name").value.trim();
-    const dx = document.getElementById("dx").value.trim();
-    if (!name || !dx) { alert("⚠️ يرجى ملء البيانات أولاً"); return; }
+var data=loadData();
+var responsibles=loadList(RESPONSIBLES_KEY,defaultResponsibles);
+var preparations=loadList(PREPARATIONS_KEY,defaultPreparations);
+var editingId=null;
+var showPastDays=false;
 
-    const canvas = document.getElementById('medicalCanvas');
-    const ctx = canvas.getContext('2d');
-    const today = new Date().toLocaleDateString('ar-EG');
-
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "#1e3a8a";
-    ctx.fillRect(0, 0, canvas.width, 25);
-    
-    ctx.fillStyle = "#1e3a8a";
-    ctx.font = "bold 38px Arial";
-    ctx.textAlign = "center";
-    ctx.fillText("📌 طلب حجز عملية جراحية", canvas.width/2, 90);
-
-    ctx.textAlign = "right";
-    
-    ctx.fillStyle = "#f8fafc";
-    ctx.roundRect(40, 130, 520, 90, 15);
-    ctx.fill();
-    ctx.fillStyle = "#1e40af";
-    ctx.font = "bold 22px Arial";
-    ctx.fillText("👤 اسم المريض:", 540, 165);
-    ctx.fillStyle = "#000000";
-    ctx.font = "26px Arial";
-    ctx.fillText(name, 540, 200);
-
-    ctx.fillStyle = "#f8fafc";
-    ctx.roundRect(40, 240, 520, 180, 15);
-    ctx.fill();
-    ctx.fillStyle = "#1e40af";
-    ctx.font = "bold 22px Arial";
-    ctx.fillText("🧠 التشخيص الطبي:", 540, 275);
-    ctx.fillStyle = "#000000";
-    ctx.font = "24px Arial";
-    wrapText(ctx, dx, 540, 315, 480, 35);
-
-    ctx.fillStyle = "#64748b";
-    ctx.font = "bold 18px Arial";
-    ctx.fillText(`تاريخ الطلب: ${today}`, 540, 460);
-
-    ctx.fillStyle = "#1e3a8a";
-    ctx.fillRect(0, 490, canvas.width, 110);
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 45px Arial";
-    ctx.textAlign = "center";
-    ctx.fillText("عمليات أ.د. على قطب", canvas.width/2, 560);
-
-    canvas.toBlob(blob => {
-        const item = new ClipboardItem({ "image/png": blob });
-        navigator.clipboard.write([item]).then(() => {
-            const status = document.getElementById('status');
-            status.innerText = "✅ تم إنشاء الكارت ونسخه! الصقه الآن في واتساب";
-            setTimeout(() => status.innerText = "", 5000);
-        });
-    });
+function saveAll(){
+ safeSet(STORAGE_KEY,JSON.stringify(data));
+ safeSet(RESPONSIBLES_KEY,JSON.stringify(responsibles));
+ safeSet(PREPARATIONS_KEY,JSON.stringify(preparations));
 }
-
-CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
-  this.beginPath();
-  this.moveTo(x + r, y);
-  this.arcTo(x + w, y, x + w, y + h, r);
-  this.arcTo(x + w, y + h, x, y + h, r);
-  this.arcTo(x, y + h, x, y, r);
-  this.arcTo(x, y, x + w, y, r);
-  this.closePath();
-  return this;
+function formatDate(s){var p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function dayName(s){
+ var d=new Date(s+'T12:00:00'),days=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+ return days[d.getDay()];
 }
-
-function sendWhatsApp() {
-    const name = document.getElementById("name").value;
-    const dx = document.getElementById("dx").value;
-    if (!name || !dx) return alert("يرجى ملء البيانات");
-    const msg = `🧠 *طلب حجز عملية*\n👤 *المريض:* ${name}\n🧠 *التشخيص:* ${dx}\n\n🏥 *عمليات أ.د. على قطب*`;
-    window.open(`https://wa.me/201107639322?text=${encodeURIComponent(msg)}`, '_blank');
+function formatTime(t){
+ if(!t)return 'لم يُحدد';
+ var p=t.split(':'),h=parseInt(p[0],10),m=p[1]||'00',period=h<12?'صباحًا':(h===12?'ظهرًا':'مساءً');
+ var hh=h%12||12;return hh+':'+m+' '+period;
 }
+function optionHtml(list,sel,blank){
+ var h='<option value="">'+esc(blank)+'</option>',i;
+ for(i=0;i<list.length;i++)h+='<option value="'+esc(list[i])+'"'+(list[i]===sel?' selected':'')+'>'+esc(list[i])+'</option>';
+ return h;
+}
+function checkboxes(containerId,selected){
+ var c=document.getElementById(containerId),i,v,h='';
+ if(!c)return;
+ selected=selected||[];
+ for(i=0;i<preparations.length;i++){
+   v=preparations[i];
+   h+='<label class="multi-option"><input type="checkbox" value="'+esc(v)+'"'+(selected.indexOf(v)>=0?' checked':'')+'><span>'+esc(v)+'</span></label>';
+ }
+ c.innerHTML=h;
+}
+function checked(containerId){
+ var c=document.getElementById(containerId),nodes,out=[],i;
+ if(!c)return out;
+ nodes=c.querySelectorAll('input[type="checkbox"]:checked');
+ for(i=0;i<nodes.length;i++)out.push(nodes[i].value);
+ return out;
+}
+function refreshAdd(){
+ document.getElementById('newResponsible').innerHTML=optionHtml(responsibles,'','-- اختر المسئول --');
+ checkboxes('newPreparation',[]);
+}
+function render(){
+ var root=document.getElementById('schedule'),today=new Date(),vis=[],i,x,groups={},dates=[],date,rows,item,h='';
+ today.setHours(0,0,0,0);
+
+ data.sort(function(a,b){return ((a.date||'9999')+(a.time||'23:59')).localeCompare((b.date||'9999')+(b.time||'23:59'));});
+ for(i=0;i<data.length;i++){
+   x=data[i];
+   if(!x.date)continue;
+   if(showPastDays || new Date(x.date+'T00:00:00')>=today)vis.push(x);
+ }
+ if(!vis.length){root.innerHTML='<div class="day-card"><div class="case">لا توجد عمليات اليوم أو خلال الأيام القادمة.</div></div>';return;}
+
+ for(i=0;i<vis.length;i++){date=vis[i].date;if(!groups[date]){groups[date]=[];dates.push(date);}groups[date].push(vis[i]);}
+ dates.sort();
+
+ for(i=0;i<dates.length;i++){
+   date=dates[i];
+   h+='<section class="day-card"><div class="day-header"><div class="date">'+dayName(date)+' '+formatDate(date)+'</div></div>';
+   rows=groups[date];
+   for(var j=0;j<rows.length;j++){
+     item=rows[j];
+     if(editingId===item.id){
+       h+='<div class="case"><div class="edit-row">'+
+       '<input id="et'+item.id+'" type="time" value="'+esc(item.time)+'">'+
+       '<input id="ep'+item.id+'" type="text" value="'+esc(item.procedure)+'">'+
+       '<select id="er'+item.id+'">'+optionHtml(responsibles,item.responsible,'-- اختر المسئول --')+'</select>'+
+       '<div id="epr'+item.id+'" class="multi-select-box"></div>'+
+       '<button class="success" onclick="saveEdit('+item.id+')">حفظ</button>'+
+       '<button class="secondary" onclick="cancelEdit()">إلغاء</button></div></div>';
+     }else{
+       var prep='—';
+       if(item.preparation && item.preparation.length){
+         prep='<div class="prep-tags">';
+         for(var k=0;k<item.preparation.length;k++)prep+='<span class="prep-tag">'+esc(item.preparation[k])+'</span>';
+         prep+='</div>';
+       }
+       h+='<div class="case">'+
+       '<div class="time-box">'+esc(formatTime(item.time))+'</div>'+
+       '<div class="procedure">'+esc(item.procedure)+'</div>'+
+       '<div class="meta-box prep-box"><span class="meta-label">المطلوب تجهيزُه للمريض</span>'+prep+'</div>'+
+       '<div class="meta-box responsible-box"><span class="meta-label">المسئول عن تجهيز المريض</span>'+(item.responsible?esc(item.responsible):'—')+'</div>'+
+       '<div class="actions"><button class="secondary" onclick="startEdit('+item.id+')">تعديل</button><button class="danger" onclick="deleteCase('+item.id+')">حذف</button></div>'+
+       '</div>';
+     }
+   }
+   h+='</section>';
+ }
+ root.innerHTML=h;
+ if(editingId!==null){
+   for(i=0;i<data.length;i++)if(data[i].id===editingId){checkboxes('epr'+editingId,data[i].preparation||[]);break;}
+ }
+}
+window.togglePastDays=function(){
+ showPastDays=!showPastDays;
+ document.getElementById('pastToggleBtn').innerHTML=showPastDays?'إخفاء الأيام السابقة':'عرض الأيام السابقة';
+ render();
+};
+window.addCase=function(){
+ var d=document.getElementById('newDate').value,t=document.getElementById('newTime').value,p=document.getElementById('newProcedure').value;
+ var r=document.getElementById('newResponsible').value,pr=checked('newPreparation');
+ p=p.replace(/^\s+|\s+$/g,'');
+ if(!d||!p){alert('يرجى إدخال التاريخ واسم العملية.');return;}
+ data.push({id:new Date().getTime(),date:d,time:t,procedure:p,responsible:r,preparation:pr});
+ saveAll();render();
+ document.getElementById('newDate').value='';document.getElementById('newTime').value='';document.getElementById('newProcedure').value='';document.getElementById('newResponsible').value='';checkboxes('newPreparation',[]);
+};
+window.startEdit=function(id){editingId=id;render();};
+window.cancelEdit=function(){editingId=null;render();};
+window.saveEdit=function(id){
+ var i,item;
+ for(i=0;i<data.length;i++)if(data[i].id===id){item=data[i];break;}
+ if(!item)return;
+ item.time=document.getElementById('et'+id).value;
+ item.procedure=document.getElementById('ep'+id).value.replace(/^\s+|\s+$/g,'');
+ item.responsible=document.getElementById('er'+id).value;
+ item.preparation=checked('epr'+id);
+ if(!item.procedure){alert('اسم العملية مطلوب.');return;}
+ editingId=null;saveAll();render();
+};
+window.deleteCase=function(id){
+ if(!confirm('هل تريد حذف هذا الموعد؟'))return;
+ var out=[],i;for(i=0;i<data.length;i++)if(data[i].id!==id)out.push(data[i]);
+ data=out;saveAll();render();
+};
+window.addResponsibleName=function(){
+ var n=prompt('اكتب اسم المسئول الجديد:');if(!n)return;n=n.replace(/^\s+|\s+$/g,'');if(!n)return;
+ if(responsibles.indexOf(n)<0)responsibles.push(n);saveAll();refreshAdd();render();
+};
+window.addPreparationItem=function(){
+ var n=prompt('اكتب بند التجهيز الجديد:');if(!n)return;n=n.replace(/^\s+|\s+$/g,'');if(!n)return;
+ if(preparations.indexOf(n)<0)preparations.push(n);saveAll();refreshAdd();render();
+};
+window.resetData=function(){
+ if(!confirm('سيتم حذف التعديلات واستعادة القائمة الأصلية. هل تريد المتابعة؟'))return;
+ data=clone(initialData);responsibles=clone(defaultResponsibles);preparations=clone(defaultPreparations);
+ saveAll();refreshAdd();render();
+};
+window.exportData=function(){
+ var backup={version:3,data:data,responsibles:responsibles,preparations:preparations};
+ var blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json;charset=utf-8'});
+ var url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='operative-list-backup.json';a.click();setTimeout(function(){URL.revokeObjectURL(url);},500);
+};
+window.importData=function(e){
+ var f=e.target.files[0];if(!f)return;var rd=new FileReader();
+ rd.onload=function(){try{var o=JSON.parse(rd.result),arr,i,out=[];
+   if(Object.prototype.toString.call(o)==='[object Array]')arr=o;
+   else if(o&&Object.prototype.toString.call(o.data)==='[object Array]'){arr=o.data;if(o.responsibles)responsibles=o.responsibles;if(o.preparations)preparations=o.preparations;}
+   else throw new Error();
+   for(i=0;i<arr.length;i++)out.push(normalizeItem(arr[i]));data=out;saveAll();refreshAdd();render();alert('تم الاستيراد بنجاح.');
+ }catch(err){alert('ملف النسخة الاحتياطية غير صالح.');}e.target.value='';};
+ rd.readAsText(f,'utf-8');
+};
+
+refreshAdd();
+render();
+})();
 </script>
 </body>
 </html>
